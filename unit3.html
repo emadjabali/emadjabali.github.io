@@ -1,0 +1,164 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>خزنة الأمن السيبراني</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@500;800&family=IBM+Plex+Sans+Arabic:wght@400;600&display=swap">
+<style>
+/* layout: copper vault header, 10x8 lock map, one lesson open at a time, badges, challenge, reward */
+:root{--bg:#fbf1e8;--card:#fffaf5;--ink:#241309;--mute:#765440;--line:#e8cbb4;--copper:#c07a4a;--peach:#fa9d5f;--hero-ink:#1c0d04;--cell:#efdccd;--ok:#1d6b45;--no:#a52f22;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1c110b;--card:#2a1a11;--ink:#ffeade;--mute:#cfa98f;--line:#4d3122;--cell:#40291c;--ok:#6fd3a0;--no:#ff9486;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1c110b;--card:#2a1a11;--ink:#ffeade;--mute:#cfa98f;--line:#4d3122;--cell:#40291c;--ok:#6fd3a0;--no:#ff9486;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.75 "IBM Plex Sans Arabic",Tahoma,sans-serif;direction:rtl;text-align:right}
+.w{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:Alexandria,Tahoma,sans-serif;line-height:1.35;margin:0 0 10px;text-wrap:balance}
+h1{font-size:clamp(2rem,9vw,3.4rem);font-weight:800}h2{font-size:1.3rem}h3{font-size:1.05rem}
+header{background:var(--copper);color:var(--hero-ink);padding-block:18px 56px;clip-path:polygon(0 0,100% 0,100% calc(100% - 34px),50% 100%,0 calc(100% - 34px))}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:600}
+section{margin-block:38px}
+button,input,a.btn{font:inherit;color:inherit}
+button,a.btn{cursor:pointer;background:var(--card);color:var(--ink);border:2px solid var(--line);border-radius:4px 14px;padding:7px 14px;text-decoration:none;display:inline-block}
+button:disabled{opacity:.55;cursor:default}
+:focus-visible{outline:3px solid var(--peach);outline-offset:2px}
+.hud{background:var(--card);border:2px solid var(--line);padding:14px;margin-top:-14px;border-radius:6px 24px}
+.hud div{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.bar{height:12px;background:var(--cell);margin-block:8px;overflow:hidden;border-radius:9px}.bar i{display:block;height:100%;background:var(--peach);transition:width .4s}
+.mute{color:var(--mute);font-size:.9rem}
+.map{display:grid;grid-template-columns:44px repeat(8,minmax(0,1fr));gap:4px;align-items:center}
+.map b{text-align:center;font-size:.8rem}
+.map button{padding:0;aspect-ratio:1;min-width:0;max-height:46px;width:100%;background:var(--cell);border:0;border-radius:3px 10px}
+.map button.on{background:var(--c);box-shadow:0 0 9px var(--c)}
+.map button.row{aspect-ratio:auto;height:100%;background:none;font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:12px;font-size:.85rem}.legend span::before{content:"";display:inline-block;width:10px;height:10px;background:var(--c);margin-left:5px}
+.tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:14px}.tabs button{padding:6px 2px}
+.tabs button[aria-pressed="true"]{background:var(--peach);color:var(--hero-ink);border-color:var(--hero-ink);font-weight:600}
+.steps{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.steps li{display:flex;align-items:center;gap:10px;background:var(--card);border:2px solid var(--line);border-radius:6px 20px;padding:10px 12px}
+.n{flex:none;width:34px;height:34px;border-radius:50%;border:4px solid var(--c);display:grid;place-items:center;font-weight:600}
+.steps li.on{border-color:var(--c)}.steps li.on .n{background:var(--c);color:#fff;text-shadow:0 0 3px #000}
+.steps .t{flex:1;min-width:0;font-weight:600}.steps button,.steps a{padding:5px 10px;font-size:.9rem}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.badge{border:2px dashed var(--line);padding:12px;text-align:center;border-radius:40px 40px 10px 10px;color:var(--mute)}
+.badge.on{border:2px solid var(--hero-ink);background:var(--peach);color:var(--hero-ink)}.badge strong{display:block}.badge small{display:block;line-height:1.5}
+.box{background:var(--card);border:2px solid var(--line);padding:18px;border-radius:8px 30px}
+.opts{display:grid;gap:8px;margin-block:12px}.opts button{text-align:right}
+.opts .good{border-color:var(--ok);color:var(--ok);font-weight:600}.opts .bad{border-color:var(--no);color:var(--no)}
+.reward{border:4px solid var(--peach)}
+input{width:100%;background:var(--bg);color:var(--ink);border:2px solid var(--line);padding:8px;border-radius:6px}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+footer{background:var(--copper);color:var(--hero-ink);padding-block:22px;text-align:center;font-weight:600}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+<div dir="rtl" lang="ar">
+<header><div class="w">
+<div class="top"><span>الصف الأول الثانوي · الوحدة الثالثة</span><button id="theme" type="button">تبديل المظهر</button></div>
+<h1>افتح خزنة الأمن السيبراني</h1>
+<p><strong>التحقق من الهوية، والعوامل، وبيانات الاعتماد، والتخزين المحمي</strong><br><bdi dir="ltr">Verify Identity, Factors, Credentials and Protected Storage</bdi></p>
+<p>10 دروس، في كل درس 8 خطوات. كل خطوة تنجزها تضيء خلية في خريطتك.</p>
+</div></header>
+<main class="w">
+<div class="hud" aria-live="polite"><div><strong id="rank"></strong><span id="xp"></span></div><div class="bar"><i id="xpbar"></i></div><div class="mute"><span id="count"></span><span id="next"></span></div></div>
+
+<section class="box"><h2>قبل أن تبدأ</h2>
+<ul><li>تقدّمك محفوظ في هذا المتصفح وعلى هذا الجهاز فقط. استخدم <strong>الجهاز والمتصفح نفسيهما</strong> كل مرة.</li>
+<li>المعلم لا يرى تقدّمك. لتُحتسب مكافأتك أرسل له لقطة الشاشة بنفسك.</li>
+<li>لا تستخدم التصفح الخاص، ولا تمسح بيانات المتصفح قبل اعتماد مكافأتك.</li>
+<li>للاستفادة من محتويات <bdi>Notebook</bdi> سجّل الدخول بحسابك في قوقل.</li>
+<li>تُسجَّل الخطوة عند الضغط على رابطها، ويمكنك تحديدها أو إلغاءها يدويًا.</li></ul>
+<p id="nostore" hidden style="color:var(--no)"><strong>تنبيه: متصفحك لا يسمح بالحفظ الآن، وسيضيع تقدّمك عند إغلاق الصفحة.</strong></p></section>
+
+<section><h2>خريطة الخزنة</h2><p class="mute">الصفوف هي الدروس والأعمدة هي الخطوات. اضغط أي خلية للانتقال إليها.</p><div class="map" id="map"></div><div class="legend" id="legend"></div></section>
+
+<section id="lesson"><h2 id="ltitle"></h2><div class="tabs" id="tabs"></div><ol class="steps" id="steps"></ol></section>
+
+<section><h2>الشارات</h2><div class="badges" id="badges"></div></section>
+
+<section class="box"><h2>التحدّي السريع</h2><p class="mute"><strong>هذا التحدّي ليس من اختبارات الوحدة</strong>، ولا يغني عنها. هو 10 مواقف للمراجعة، وتجتازه بـ 8 إجابات صحيحة، ويمكنك إعادته.</p><div id="quiz"></div></section>
+
+<section class="box reward"><h2>مكافأتك: 10 درجات</h2>
+<p>تستحقها عند تحقق الشروط الثلاثة كلها:</p><ul id="conds"></ul>
+<p><strong>الاعتماد:</strong> اكتب اسمك، ثم صوّر الشاشة بحيث يظهر اسمك وهذه البطاقة والشارات، وأرسل الصور إلى المعلم قبل الموعد الذي يعلنه.</p>
+<label for="name">اسمك الثلاثي</label><input id="name" autocomplete="name">
+<p id="status" style="font-weight:600" aria-live="polite"></p></section>
+
+<section><h2>روابط الوحدة</h2><div class="links">
+<a class="btn" target="_blank" rel="noopener" href="https://notebook.google.com/notebook/2d0f71ee-ea77-4c12-9d13-bb6e2b9f3b89">اختبار شامل للوحدة</a>
+<a class="btn" target="_blank" rel="noopener" href="https://teams.cloud.microsoft/l/team/19%3AUkgWbyauvTd8ozxMtkBsFN5kodDWtPMYMre5VRWTdMc1%40thread.tacv2/conversations?groupId=3263766a-a5aa-4edf-8a72-d368338f3628&amp;tenantId=70d7d0be-5c80-4c8a-b105-6322ea455a80">الانضمام إلى فريق التيمز</a>
+<a class="btn" target="_blank" rel="noopener" href="https://linktr.ee/emadjabali?utm_source=linktree_profile_share&amp;ltsid=80c437ed-5c6c-402a-9827-dac3791f6310">التواصل مع المعلم</a></div>
+<p class="mute">الاختبار الشامل غير محسوب ضمن شروط المكافأة. رأيك ومقترحاتك لتطوير هذا العمل مهمة.</p></section>
+
+<section><button id="reset" type="button">إعادة ضبط التقدّم</button>
+<div id="confirm" class="box" hidden><p>سيُمسح كل تقدّمك ونقاطك وشاراتك من هذا المتصفح، ولا يمكن استرجاعها. هل أنت متأكد؟</p><button id="yes" type="button">نعم، امسح</button> <button id="no" type="button">إلغاء</button></div></section>
+</main>
+<footer><div class="w">معلم المادة: أ. عماد جبلي | ثانوية الموهوبين التقنية- جازان | مدير المدرسة: أ. أحمد الرفاعي</div></footer>
+</div>
+<script>
+const L=[["https://drive.google.com/file/d/1iqFJvfH7G-Vumzn7_gpPJLwvgwxdgE8V/view?usp=sharing", "https://notebooklm.link.google/qFpVXpMRsL7A", "https://notebooklm.link.google/tB8Cu0bEdsaB", "https://notebooklm.link.google/VPPH9NdnJ2cp", "https://notebooklm.link.google/YacjswKcWI0g", "https://notebooklm.link.google/pfQOEIUpmmRf", "https://wordwall.net/resource/123710396?wwmethod=link", "https://notebooklm.link.google/RvkitkLbV0Na"], ["https://drive.google.com/file/d/15BxioGkVZGdOl5nmzWeEQ5gd6o_t7XqA/view?usp=sharing", "https://notebooklm.link.google/1Bc3fqJZfJCI", "https://notebooklm.link.google/VtfFLPHsGL76", "https://notebooklm.link.google/XMEOIAac7OOo", "https://notebooklm.link.google/IZTWEMLRJDXQ", "https://notebooklm.link.google/44ljpAGAxL0m", "https://wordwall.net/resource/123710403?wwmethod=link", "https://notebooklm.link.google/VqRIkxI8BwOB"], ["https://drive.google.com/file/d/1CKxBKiZ39JtM5wwj9J6rrOMXPKAKB5j5/view?usp=sharing", "https://notebooklm.link.google/lEMpVbCesT5F", "https://notebooklm.link.google/nr0lZgKOIeT9", "https://notebooklm.link.google/f4V84Sho92VH", "https://notebooklm.link.google/Hs0woCbybbfB", "https://notebooklm.link.google/QYOe7CDK8zhO", "https://wordwall.net/resource/123710581?wwmethod=link", "https://notebooklm.link.google/ZCdJ1op5gfIK"], ["https://drive.google.com/file/d/1egtIXZHTrq9mP1v-DJTVx7zwJZIVxINg/view?usp=sharing", "https://notebooklm.link.google/Mtlke7vOmSNF", "https://notebooklm.link.google/7flOmRyTpylp", "https://notebooklm.link.google/bDenNecMdjjK", "https://notebooklm.link.google/ziATO7xvZJ78", "https://notebooklm.link.google/D0kM1DDeJa6I", "https://wordwall.net/resource/123710792?wwmethod=link", "https://notebooklm.link.google/WAo9bP0ZtL58"], ["https://drive.google.com/file/d/1dP7wraz_1esWPLaxQ8ytGLAcgY6rKvsn/view?usp=sharing", "https://notebooklm.link.google/piwEHHFGcWuM", "https://notebooklm.link.google/v4YGDJD21noV", "https://notebooklm.link.google/q0agwxDvBq2X", "https://notebooklm.link.google/g13CdLcu1pC9", "https://notebooklm.link.google/dt2Pfa2reKEF", "https://wordwall.net/resource/123710844?wwmethod=link", "https://notebooklm.link.google/pEvICNNlgPVL"], ["https://drive.google.com/file/d/1h9hOSOvsgpLMiB_oTN1t7uJ2V4Oscmf9/view?usp=sharing", "https://notebooklm.link.google/5YypHrPHR9yQ", "https://notebooklm.link.google/7fyCOWjtA3A1", "https://notebooklm.link.google/lL1B4mEhoEAF", "https://notebooklm.link.google/7FDaZheK8957", "https://notebooklm.link.google/8zUxvK2rPJFw", "https://wordwall.net/resource/123710882?wwmethod=link", "https://notebooklm.link.google/8KNhCekM4z0W"], ["https://drive.google.com/file/d/1bam-qE7YMhZh47qlrrwUzr811HCu0yCM/view?usp=sharing", "https://notebooklm.link.google/n2P3SldhO3NC", "https://notebooklm.link.google/BxhfIKtXHlpE", "https://notebooklm.link.google/dMtgHPrpE11y", "https://notebooklm.link.google/zCmJBTVVHybV", "https://notebooklm.link.google/r57hD800tAtF", "https://wordwall.net/resource/123710881?wwmethod=link", "https://notebooklm.link.google/4EyDxiBEr4kc"], ["https://drive.google.com/file/d/1nSzzM3nVNLUKkCndam70rfidcXZ3rYpq/view?usp=sharing", "https://notebooklm.link.google/E06gisv1wsD6", "https://notebooklm.link.google/8WmujRxYVOyW", "https://notebooklm.link.google/42bXBOfAHy75", "https://notebooklm.link.google/qdEmzhTXbL6k", "https://notebooklm.link.google/iXpKLqmKcTeh", "https://wordwall.net/resource/123710942?wwmethod=link", "https://notebooklm.link.google/GthzKkICPosC"], ["https://drive.google.com/file/d/12TgHchLZabbm-La2o-QK-pqEZFL5WH4p/view?usp=sharing", "https://notebooklm.link.google/GE7QImArJE5U", "https://notebooklm.link.google/MWtwOwb9e9M8", "https://notebooklm.link.google/27Zo6OImLygz", "https://notebooklm.link.google/NnA5VOYKKxfB", "https://notebooklm.link.google/mmjMJYowPVeF", "https://wordwall.net/resource/123710987?wwmethod=link", "https://notebooklm.link.google/syrzGC3NwU6Q"], ["https://drive.google.com/file/d/11sqkIvvvMBMSBKXIQ0h79EPk11erpSNL/view?usp=sharing", "https://notebooklm.link.google/RV8SUBEIuQ0f", "https://notebooklm.link.google/Gvg0H6Nl2v3F", "https://notebooklm.link.google/hoGVhDS4GG2v", "https://notebooklm.link.google/9L4SraUUW4Vp", "https://notebooklm.link.google/vEFYIovJgSGA", "https://wordwall.net/resource/123712141?wwmethod=link", "https://notebooklm.link.google/YyptfrUGOZqv"]];
+const S=["الدرس PDF","الفيديو","العرض التقديمي","المصطلحات","إنفوجرافيك","خريطة ذهنية","ألعاب Wordwall","الاختبار"];
+const C=["#e3a800","#ee8b00","#e04a14","#cc0f8c","#93309f","#6247ae","#2c76cc","#009fdc"];
+const R=[[0,"مبتدئ"],[100,"متحقّق"],[300,"حارس الهوية"],[550,"خبير العوامل"],[850,"أمين الخزنة"],[1100,"سيّد الأمن"]];
+const Q=[
+["تكتب كلمة المرور لتدخل بريدك. أي عامل تحقق استخدمت؟",["شيء تعرفه","شيء تملكه","شيء أنت عليه (صفة حيوية)"],"كلمة المرور معلومة تحفظها، فهي من عامل المعرفة."],
+["تفتح جهازًا ببصمة إصبعك. البصمة مثال على:",["شيء أنت عليه (صفة حيوية)","شيء تعرفه","اسم المستخدم"],"البصمة صفة حيوية في جسمك."],
+["أي الخيارات يُعد تحققًا متعدد العوامل؟",["كلمة مرور ثم رمز من تطبيق على جوالك","كلمة مرور ثم سؤال أمني","كلمتا مرور مختلفتان"],"التعدد يكون بنوعين مختلفين من العوامل. كلمة المرور والسؤال الأمني كلاهما شيء تعرفه."],
+["كتبت اسم المستخدم ولم تكتب كلمة المرور بعد. ماذا فعلت؟",["ادّعيت هوية ولم تُثبتها بعد","أثبتّ هويتك","حصلت على الصلاحيات"],"اسم المستخدم يقول من أنت، والتحقق يثبت ذلك."],
+["دخل طالب المنصة بنجاح لكنه لا يستطيع تعديل الدرجات. السبب مرتبط بـ:",["الصلاحيات (التفويض)","فشل التحقق من الهوية","ضعف الشبكة"],"التحقق يجيب: من أنت؟ والتفويض يجيب: ماذا يُسمح لك أن تفعل؟"],
+["ما الطريقة السليمة لتخزين كلمات المرور في موقع؟",["تجزئتها (Hashing) مع ملح (Salt)","حفظها نصًا واضحًا","حفظها في ملف باسم مخفي"],"التجزئة المملّحة تجعل استرجاع كلمة المرور الأصلية أصعب بكثير إذا سُرّبت البيانات."],
+["ما فائدة إضافة الملح (Salt) قبل التجزئة؟",["تختلف النتيجة حتى لو تطابقت كلمتا مرور","تجعل كلمة المرور أقصر","تغني عن كلمة المرور"],"لكل حساب ملح خاص، فيصعب استخدام جداول جاهزة لكشف كلمات كثيرة دفعة واحدة."],
+["وفق إرشادات NIST الحديثة، متى يجب على الموقع إلزامك بتغيير كلمة المرور؟",["عند وجود دليل على اختراقها","كل شهر دائمًا","كل أسبوع دائمًا"],"التغيير الدوري الإجباري لم يعد مطلوبًا، والإلزام يكون عند الاختراق."],
+["وصلك اتصال يقول إنه من الدعم ويطلب رمز التحقق الذي وصل جوالك. ماذا تفعل؟",["لا أعطيه الرمز وأتواصل مع الجهة عبر قناتها الرسمية","أعطيه الرمز لأنه مؤقت","أرسل له كلمة المرور بدلًا من الرمز"],"من يملك الرمز قد يدخل حسابك. هذا أسلوب تصيّد شائع."],
+["زميلك يستخدم كلمة مرور واحدة لكل حساباته. ما أفضل نصيحة؟",["كلمة طويلة مختلفة لكل حساب مع مدير كلمات مرور","أن يضيف رقم 1 في آخرها لكل موقع","أن يشاركها مع صديق حتى لا ينساها"],"تسريب موقع واحد لا يجب أن يفتح بقية حساباتك."]];
+const $=id=>document.getElementById(id);
+const el=(t,p,txt,cls)=>{const e=document.createElement(t);if(txt!=null)e.textContent=txt;if(cls)e.className=cls;p&&p.append(e);return e};
+const KEY="cyber-u3-v1";let canStore=true;
+const blank=()=>({done:{},best:0,name:"",lesson:0,theme:""});
+let st=blank();
+try{st=Object.assign(blank(),JSON.parse(localStorage.getItem(KEY)||"{}"));localStorage.setItem(KEY+"t","1")}catch(e){canStore=false}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){$("nostore").hidden=false}};
+const on=(l,s)=>!!st.done[l+"-"+s];
+const full=l=>S.every((_,s)=>on(l,s));
+const lessons=()=>L.filter((_,l)=>full(l)).length;
+const col=s=>L.filter((_,l)=>on(l,s)).length;
+const total=()=>Object.values(st.done).filter(Boolean).length;
+const xp=()=>total()*10+lessons()*20+st.best*10;
+const B=[["الخطوة الأولى","أنجز أي خطوة",()=>total()>0],["أول قفل","أكمل درسًا بخطواته الثماني",()=>lessons()>=1],["منتصف الطريق","أكمل 5 دروس",()=>lessons()>=5],["لاعب Wordwall","أنجز خطوة الألعاب في الدروس العشرة",()=>col(6)==10],["المُختبَر","أنجز خطوة الاختبار في الدروس العشرة",()=>col(7)==10],["فاتح الخزنة","أكمل الدروس العشرة",()=>lessons()==10],["عين الحارس","8 من 10 أو أكثر في التحدّي",()=>st.best>=8]];
+function mark(l,s,v){st.done[l+"-"+s]=v;save();render()}
+function go(l,s){st.lesson=l;save();render();const t=s==null?$("lesson"):$("steps").children[s];t.scrollIntoView({behavior:"smooth",block:s==null?"start":"center"});if(s!=null)t.querySelector("a").focus({preventScroll:true})}
+function render(){
+ const a=document.activeElement&&document.activeElement.dataset.k;
+ const x=xp();let i=R.length-1;while(x<R[i][0])i--;
+ $("rank").textContent="رتبتك: "+R[i][1];$("xp").textContent=x+" XP من 1100";$("xpbar").style.width=x/11+"%";
+ $("count").textContent=`أنجزت ${total()} من 80 خطوة. `;$("next").textContent=R[i+1]?`الرتبة التالية «${R[i+1][1]}» عند ${R[i+1][0]} XP`:"وصلت أعلى رتبة";
+ const m=$("map");m.textContent="";el("b",m,"درس");S.forEach((_,s)=>el("b",m,s+1));
+ L.forEach((_,l)=>{const r=el("button",m,l+1,"row");r.dataset.k="r"+l;r.setAttribute("aria-label","الدرس "+(l+1));r.onclick=()=>go(l);
+  S.forEach((n,s)=>{const c=el("button",m,null,on(l,s)?"on":"");c.dataset.k=`c${l}-${s}`;c.style.setProperty("--c",C[s]);c.setAttribute("aria-label",`الدرس ${l+1}، ${n}، ${on(l,s)?"منجزة":"غير منجزة"}`);c.onclick=()=>go(l,s)})});
+ const t=$("tabs");t.textContent="";L.forEach((_,l)=>{const b=el("button",t,"درس "+(l+1)+(full(l)?" ✓":""));b.dataset.k="t"+l;b.setAttribute("aria-pressed",l==st.lesson);b.onclick=()=>{st.lesson=l;save();render()}});
+ const l=st.lesson;$("ltitle").textContent=`الدرس ${l+1}: ${S.filter((_,s)=>on(l,s)).length} من 8 خطوات`;
+ const o=$("steps");o.textContent="";S.forEach((n,s)=>{const li=el("li",o,null,on(l,s)?"on":"");li.style.setProperty("--c",C[s]);el("span",li,s+1,"n");el("span",li,n,"t");
+  const k=el("a",li,"افتح","btn");k.href=L[l][s];k.target="_blank";k.rel="noopener";k.dataset.k="a"+s;const rec=()=>setTimeout(()=>mark(l,s,true),50);k.onclick=rec;k.onauxclick=e=>{if(e.button==1)rec()};
+  const d=el("button",li,on(l,s)?"منجزة ✓":"تحديد");d.dataset.k="d"+s;d.setAttribute("aria-pressed",on(l,s));d.onclick=()=>mark(l,s,!on(l,s))});
+ const bg=$("badges");bg.textContent="";B.forEach(([n,d,f])=>{const ok=f(),c=el("div",bg,null,"badge"+(ok?" on":""));el("strong",c,n);el("small",c,d);el("small",c,ok?"مفتوحة":"مقفلة")});
+ const got=B.filter(b=>b[2]()).length,cd=$("conds");cd.textContent="";
+ [[`إنجاز الخطوات الثماني في الدروس العشرة (${lessons()} من 10)`,lessons()==10],[`اجتياز التحدّي بـ 8 من 10 على الأقل (أفضل نتيجة: ${st.best})`,st.best>=8],[`فتح الشارات السبع كلها (${got} من 7)`,got==7]].forEach(([s,ok])=>el("li",cd,s+(ok?" — تحقق":" — لم يتحقق بعد")));
+ $("status").textContent=got==7?`مبروك${st.name?" "+st.name:""}! حققت الشروط. صوّر الشاشة الآن وأرسلها للمعلم. (${new Date().toLocaleDateString("ar-SA-u-ca-gregory-nu-latn")})`:"لم تكتمل الشروط بعد.";
+ if(a){const f=document.querySelector(`[data-k="${a}"]`);f&&f.focus({preventScroll:true})}
+}
+let qi=0,score=0,order=[];
+function intro(){const q=$("quiz");q.textContent="";if(st.best)el("p",q,`أفضل نتيجة لك: ${st.best} من 10`);el("button",q,st.best?"أعد التحدّي":"ابدأ التحدّي").onclick=()=>{qi=0;score=0;ask()}}
+function ask(){const q=$("quiz");q.textContent="";const[text,op,why]=Q[qi];el("p",q,`الموقف ${qi+1} من 10`,"mute");el("h3",q,text);
+ const box=el("div",q,null,"opts"),fb=el("div",q);fb.setAttribute("aria-live","polite");
+ order=op.map((o,i)=>[Math.random(),o,i]).sort((a,b)=>a[0]-b[0]);
+ order.forEach(([,o,i])=>{const b=el("button",box,o);b.type="button";b.dataset.i=i;b.onclick=()=>{
+  [...box.children].forEach(c=>{c.disabled=true;if(c.dataset.i=="0"){c.className="good";c.textContent+=" ✓"}});
+  if(i==0)score++;else{b.className="bad";b.textContent+=" ✗"}
+  el("p",fb,(i==0?"إجابة صحيحة. ":"ليست هذه. ")+why);
+  el("button",fb,qi<9?"التالي":"اعرض النتيجة").onclick=()=>{qi++;if(qi<10)ask();else{st.best=Math.max(st.best,score);save();render();intro();$("quiz").prepend(Object.assign(document.createElement("h3"),{textContent:`نتيجتك ${score} من 10. ${score>=8?"اجتزت التحدّي.":"تحتاج 8 للاجتياز، حاول مرة أخرى."}`}))}}}})}
+S.forEach((n,s)=>el("span",$("legend"),`${s+1} ${n}`).style.setProperty("--c",C[s]));
+const root=document.documentElement;if(st.theme)root.dataset.theme=st.theme;
+$("theme").onclick=()=>{const dark=root.dataset.theme?root.dataset.theme=="dark":matchMedia("(prefers-color-scheme:dark)").matches;st.theme=root.dataset.theme=dark?"light":"dark";save()};
+$("name").value=st.name;$("name").oninput=e=>{st.name=e.target.value;save();render()};
+$("reset").onclick=()=>$("confirm").hidden=false;$("no").onclick=()=>$("confirm").hidden=true;
+$("yes").onclick=()=>{const th=st.theme;st=blank();st.theme=th;save();$("name").value="";$("confirm").hidden=true;render();intro()};
+$("nostore").hidden=canStore;render();intro();
+</script>
+
+</body></html>
