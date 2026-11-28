@@ -137,7 +137,6 @@
     }
     .nav-level {
       display: none;
-      animation: fadeIn 0.25s ease;
     }
     .nav-level.active {
       display: block;
@@ -187,9 +186,11 @@
     .back-nav-btn:hover {
       background: rgba(232,131,58,0.2);
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(5px); }
-      to { opacity: 1; transform: translateY(0); }
+    .about-link-wrap {
+      margin-top: 1.6rem;
+      padding-top: 1.2rem;
+      border-top: 1px dashed #262b36;
+      text-align: center;
     }
     footer {
       margin-top: 1.8rem;
@@ -224,8 +225,8 @@
 
     <section class="units-section">
       <!-- المستوى 1: المرحلة الدراسية -->
-      <div id="level-stage" class="nav-level active">
-        <div class="stage-card" onclick="showLevel('level-course')">
+      <div id="level-stage" class="nav-level active" style="display: block;">
+        <div class="stage-card" onclick="openLevel('level-course')">
           <div class="stage-icon">🎓</div>
           <h3>المرحلة الثانوية</h3>
           <p>اضغط للدخول إلى المقررات الدراسية</p>
@@ -233,9 +234,9 @@
       </div>
 
       <!-- المستوى 2: المقررات الدراسية -->
-      <div id="level-course" class="nav-level">
-        <button type="button" class="back-nav-btn" onclick="showLevel('level-stage')">← العودة إلى المراحل الدراسية</button>
-        <div class="stage-card" onclick="showLevel('level-units')">
+      <div id="level-course" class="nav-level" style="display: none;">
+        <button type="button" class="back-nav-btn" onclick="openLevel('level-stage')">← العودة إلى المراحل الدراسية</button>
+        <div class="stage-card" onclick="openLevel('level-units')">
           <div class="stage-icon">🛡️</div>
           <h3>مقرر أساسيات الأمن السيبراني</h3>
           <p>اضغط لاستعراض وحدات المقرر والأنشطة التفاعلية</p>
@@ -243,5 +244,60 @@
       </div>
 
       <!-- المستوى 3: وحدات المقرر -->
-      <div id="level-units" class="nav-level">
-        <button type="
+      <div id="level-units" class="nav-level" style="display: none;">
+        <button type="button" class="back-nav-btn" onclick="openLevel('level-course')">← العودة إلى المقررات الدراسية</button>
+        <div class="units-title">📚 وحدات مقرر أساسيات الأمن السيبراني</div>
+        <div class="units-grid">
+
+          <div class="unit-box">
+            <h4>الوحدة الأولى</h4>
+            <div class="btn-group">
+              <a href="unit1.pdf" target="_blank" class="btn btn-secondary">📄 دليل الوحدة (PDF)</a>
+            </div>
+          </div>
+
+          <div class="unit-box">
+            <h4>الوحدة الثانية</h4>
+            <div class="btn-group">
+              <a href="unit2.html" class="btn btn-primary">🗺️ خريطة الحماية التفاعلية</a>
+              <a href="unit2.pdf" target="_blank" class="btn btn-secondary">📄 دليل الوحدة (PDF)</a>
+            </div>
+          </div>
+
+          <div class="unit-box">
+            <h4>الوحدة الثالثة</h4>
+            <div class="btn-group">
+              <a href="unit3.html" class="btn btn-primary">🗺️ خزنة الأمن السيبراني</a>
+              <a href="unit3.pdf" target="_blank" class="btn btn-secondary">📄 دليل الوحدة (PDF)</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="about-link-wrap">
+        <a href="about.html" class="btn btn-secondary">👤 نبذة عني</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>جميع الحقوق محفوظة &copy; 2026 | emadjabali.com</div>
+  </footer>
+
+  <script>
+    function openLevel(levelId) {
+      var levels = document.querySelectorAll('.nav-level');
+      for (var i = 0; i < levels.length; i++) {
+        levels[i].classList.remove('active');
+        levels[i].style.display = 'none';
+      }
+      var target = document.getElementById(levelId);
+      if (target) {
+        target.classList.add('active');
+        target.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
